@@ -3,10 +3,41 @@
 # @Author: Truman
 # @File : app.py
 
+import os
+import sys
+
 from flask import Flask, render_template
 from flask import url_for
+from flask_sqlalchemy import SQLAlchemy
 
+# SQLite URI compatible
+WIN = sys.platform.startswith('win')
+if WIN:
+    prefix = 'sqlite:///'
+else:
+    prefix = 'sqlite:////'
+
+# 实例初始化
 app = Flask(__name__)
+# 配置数据连接地址
+# app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(app.root_path, 'data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+# 关闭对模型修改的监控
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# 在扩展类实例化化前加载配置
+db = SQLAlchemy(app)
+
+#表名将会是user，自动生成，小写处理
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)    #主键
+    name = db.Column(db.String(20))                 #名字
+
+class Notes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    tile = db.Column(db.String(60))
+    notes = db.Column(db.String(20))
+
 name = 'Truman'
 movies = [
     {'title': 'My Neighbor Totoro', 'year': '1988'},
@@ -42,4 +73,3 @@ def test_url_for():
     print(url_for('test_url_for'))
     print(url_for('test_url_for', num = 2))
     return  'Test page'
-

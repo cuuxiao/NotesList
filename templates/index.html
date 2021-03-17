@@ -2,13 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+
     <title>{{ name }}'s Noteslist</title>
+    <link rel="icon" href="{{ url_for('static', filename='icon.png')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" type="text/css">
 </head>
 <body>
-    <h2>{{ name }}'s Noteslist</h2>
+
+    <h2>
+        <img alt="List" class="list" src="{{ url_for('static', filename='images/list.png')}}">
+        {{ name }}'s Noteslist
+    </h2>
+
     {# 使用 length 过滤器获取 movies 变量的长度 #}
     <p>{{ movies|length }} Titles</p>
-    <ul>
+
+    <ul class="movie-list">
         {% for movie in movies %}
             {# 迭代 movies 变量 #}
         <li>{{ movie.title }} - {{ movie.year }}</li>
@@ -16,8 +26,12 @@
         {% endfor %}
             {# 使用 endfor 标签结束 for 语句 #}
     </ul>
+
+    <img alt="Book" class="book" src="{{ url_for('static', filename='images/book.png') }}">
+
     <footer>
-        <small>&copy; 2021 <a href="http://helloflask.com/tutorial">HelloFlask</a></small>
+        <small>&copy; 2021 <a href="http://www.baidu.com">Truman's notesList</a></small>
     </footer>
+
 </body>
 </html>
