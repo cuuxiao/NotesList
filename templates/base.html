@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <!--<meta>元素会设置页面的视口，让页面根据设备的宽度来自动缩放页面，让移动设备拥有更好的浏览体验-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user.name }}'s Noteslist</title>
+    <link rel="icon" href="{{ url_for('static', filename='icon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+    {% endblock %}
+</head>
+<body>
+    <h2>
+        <img alt="List" class="list" src="{{ url_for('static', filename='images/list.png') }}">
+        {{ user.name }}'s Noteslist
+    </h2>
+    <!--<nav>新的页面添加了一个导航栏-->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+        </ul>
+    </nav>
+    {% block content %}{% endblock %}
+    <footer>
+        <small>&copy; 2021 <a href="http://www.baidu.com">Truman's notesList</a></small>
+    </footer>
+</body>
+</html>

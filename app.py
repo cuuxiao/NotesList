@@ -50,24 +50,33 @@ def initdb(drop):
 
 @app.route('/')
 def index():
-    user = User.query.first()
     notes = Notes.query.all()
-    return render_template('index.html', name = user.name, movies = notes)
+    return render_template('index.html', movies = notes)
 
-@app.route('/home')
-@app.route('/index')
-def hello():
-    return '<h1>hello Truman!</h1><img src="http://helloflask.com/totoro.gif">'
+@app.errorhandler(404)      # 传入需要处理的错误代码
+def page_not_found(e):      # 接受异常对象作为参数
+    return render_template('404.html'), 404  # 返回模板和状态码
 
-@app.route('/user/<name>')
-def user_page(name):
-    return 'User : %s' % name
+@app.context_processor
+def inject_user():
+    user = User.query.first()
+    return dict(user=user)      # 需要返回字典，等同于return {‘user’： user}
 
-@app.route('/test')
-def test_url_for():
-    print(url_for('hello'))
-    print(url_for('user_page', name = 'truman'))
-    print(url_for('user_page', name = 'peter'))
-    print(url_for('test_url_for'))
-    print(url_for('test_url_for', num = 2))
-    return 'Test page'
+
+# @app.route('/home')
+# @app.route('/index')
+# def hello():
+#     return '<h1>hello Truman!</h1><img src="http://helloflask.com/totoro.gif">'
+#
+# @app.route('/user/<name>')
+# def user_page(name):
+#     return 'User : %s' % name
+#
+# @app.route('/test')
+# def test_url_for():
+#     print(url_for('hello'))
+#     print(url_for('user_page', name = 'truman'))
+#     print(url_for('user_page', name = 'peter'))
+#     print(url_for('test_url_for'))
+#     print(url_for('test_url_for', num = 2))
+#     return 'Test page'
