@@ -6,7 +6,7 @@
 import os
 import sys
 
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, request, redirect, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 import click
 
@@ -23,60 +23,65 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(app.root_path, 'data.db')
 # 关闭对模型修改的监控
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SECRET_KEY'] = os.urandom(24)
 
 # 在扩展类实例化化前加载配置
 db = SQLAlchemy(app)
 
-#表名将会是user，自动生成，小写处理
+
+# 表名将会是user，自动生成，小写处理
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)    # 主键
-    name = db.Column(db.String(20))                 # 名字
+    id = db.Column(db.Integer, primary_key=True)  # 主键
+    name = db.Column(db.String(20))  # 名字
+
 
 class Notes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(60))
-    note = db.Column(db.String(20))
+    title = db.Column(db.String(20))
+    comments = db.Column(db.String(20))
+    link = db.Column(db.String(20))
+
 
 @app.cli.command()  # 注册为命令
 @click.option('--drop', is_flag=True, help='Create after drop.')
-    # 设置选项
+# 设置选项
 def initdb(drop):
     """Initialize the database"""
     if drop:
         db.drop_all()
         click.echo('drop the database. ')  # 输出提示信息
     db.create_all()
-    click.echo('Initialized database. ')    # 输出提示信息
+    click.echo('Initialized database. ')  # 输出提示信息
 
-@app.route('/')
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    notes = Notes.query.all()
-    return render_template('index.html', movies = notes)
+    if request.method == 'POST':
+        # 获取表单数据
+        title = request.form.get('title')
+        comments = request.form.get('comments')
+        link = request.form.get('link')
+        # 判断数据是否符合要求
+        if not title or not comments or len(comments) > 20 or len(title) > 20:
+            flash('Invalid input.')                 # 显示错误信息
+            return redirect(url_for('index'))       # 重定向回主页
+        # 保存表单数据到数据库
+        notes = Notes(title=title, comments=comments, link=link)
+        db.session.add(notes)
+        db.session.commit()
+        flash('Item created.')
+        return redirect(url_for('index'))
+    comments = Notes.query.all()
+    return render_template('index.html', comments=comments)
 
-@app.errorhandler(404)      # 传入需要处理的错误代码
-def page_not_found(e):      # 接受异常对象作为参数
+
+@app.errorhandler(404)  # 传入需要处理的错误代码
+def page_not_found(e):  # 接受异常对象作为参数
     return render_template('404.html'), 404  # 返回模板和状态码
+
 
 @app.context_processor
 def inject_user():
     user = User.query.first()
-    return dict(user=user)      # 需要返回字典，等同于return {‘user’： user}
-
-
-# @app.route('/home')
-# @app.route('/index')
-# def hello():
-#     return '<h1>hello Truman!</h1><img src="http://helloflask.com/totoro.gif">'
-#
-# @app.route('/user/<name>')
-# def user_page(name):
-#     return 'User : %s' % name
-#
-# @app.route('/test')
-# def test_url_for():
-#     print(url_for('hello'))
-#     print(url_for('user_page', name = 'truman'))
-#     print(url_for('user_page', name = 'peter'))
-#     print(url_for('test_url_for'))
-#     print(url_for('test_url_for', num = 2))
-#     return 'Test page'
+    return dict(user=user)  # 需要返回字典，等同于return {‘user’： user}

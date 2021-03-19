@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
-<p>{{ movies|length }} Titles</p>
+<p>{{ comments|length }} Titles</p>
+<form method="post">
+    Title <input type="text" name="title" autocomplete="off" required>
+    Comments <input type="text" name="comments" autocomplete="off" required>
+    Link <input type="text" name="link" autocomplete="off" required>
+    <input class="btn" type="submit" name="submit" value="Add">
+</form>
+<!--autocomplete 属性设为 off 来关闭自动完成（按下输入框不显示历史输入记录）；
+另外还添加了 required 标志属性，如果用户没有输入内容就按下了提交按钮，浏览器会显示错误提示。-->
     <ul class="movie-list">
-    {% for movie in movies %}
-            {# 迭代 movies 变量 #}
-        <li>{{ movie.title }} -- {{ movie.note }}
+    {% for movie in comments %}
+            {# 迭代 comments 变量 #}
+        <li>{{ movie.title }} | | | | {{ movie.comments }}| | | | {{ movie.link }}
                 {# 等同于 movie['title'] #}
             <span class="float-right">
                 <a class="imdb" href="https://www.bing.com/search?q={{movie.title }}" target="_blank" title="Find this movie on IMDb">Bring</a>
