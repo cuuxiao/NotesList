@@ -166,7 +166,7 @@ def add():
         content = request.form.get('content')
         link = request.form.get('link')
 
-        if not title or not content or len(link) > 20 or len(content) > 20 or len(title) > 20:
+        if not title or not content or len(link) > 30 or len(content) > 20 or len(title) > 20:
             flash('Invalid input.')  # 显示错误信息
             return redirect(url_for('add'))  # 重定向回主页
 
@@ -189,7 +189,7 @@ def edit(notes_id):
         content = request.form['content']
         link = request.form['link']
 
-        if not title or not content or len(link) > 20 or len(content) > 20 or len(title) > 20:
+        if not title or not content or len(link) > 30 or len(content) > 20 or len(title) > 20:
             flash('Inavelid edit input.')
             return redirect(url_for('edit', notes_id=notes_id))  # 重定向对应的编辑页面
 

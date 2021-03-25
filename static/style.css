@@ -48,27 +48,16 @@ nav a:hover {
     float: left;
 }
 
-/* ====================列 表 样 式 ============================ */
-.movie-list {
-    list-style-type: none;
-    padding: 0;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-.movie-list li {
-    padding: 12px 24px;
-    border-bottom: 1px solid #ddd;
-}
-.movie-list li:last-child {
-    border-bottom:none;
-}
-.movie-list li:hover {
-    background-color: #f8f9fa;
+/* ====================内容样式==================================== */
+.font-center{ text-align:center}
+.btbg{background:#e9faff !important;}
+.btbg1{background:#f3f3f3 !important;}
+.titfont {
+	font-family: 微软雅黑;
+	font-size: 16px;
+	color: #255e95;
 }
 
-.inline-form{
-    display: inline;
-}
 /* ====================Add&Edit元素样式 ============================ */
 input[type=submit] {
     font-family: inherit;
@@ -118,6 +107,31 @@ footer {
     padding: 10px;
 }
 
+/* ==================== 样式备份 ============================ */
+/*
+.notes-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.notes-list li {
+    padding: 12px 24px;
+    border-bottom: 1px solid #ddd;
+}
+.notes-list li:last-child {
+    border-bottom:none;
+}
+.notes-list li:hover {
+    background-color: #f8f9fa;
+}
+
+.inline-form{
+    display: inline;
+}
+*/
+
+/*
 .bing {
     font-size: 12px;
     font-weight: bold;
@@ -127,3 +141,4 @@ footer {
     border-radius: 5px;
     padding: 3px 5px;
 }
+*/

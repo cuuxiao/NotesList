@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<p>{{ notes|length }} Records</p>
+<!--<p>{{ notes|length }} Records</p>-->
 <!-- 在模板中可以直接使用 current_user 变量 -->
 <!--{% if current_user.is_authenticated %}-->
 <!--<form method="post">-->
@@ -12,21 +12,46 @@
 <!--{% endif %}-->
 <!--autocomplete 属性设为 off 来关闭自动完成（按下输入框不显示历史输入记录）；
 另外还添加了 required 标志属性，如果用户没有输入内容就按下了提交按钮，浏览器会显示错误提示。-->
-<ul class="movie-list">
-{% for notes in notes %}
+
+<table width="100%" border="0" cellpadding="8">
+    <tr>
+    <td align="left" height="25">{{ notes|length }} Records</td>
+    </tr>
+    <tr>
+        <th width="25%" class="btbg font-center titfont">Title</th>
+        <th width="30%" class="btbg font-center titfont">Content</th>
+        <th width="30%" class="btbg font-center titfont">Link</th>
+        <th width="15%" class="btbg font-center titfont">Operation</th>
+    {% for notes in notes %}
         {# 迭代 notes 变量 #}
-    <li>{{ notes.title }} | | | | {{ notes.content }}| | | | {{ notes.link }}
-            {# 等同于 notes['title'] #}
-        <span class="float-right">
-<!--            <a class="bing" href="https://www.bing.com/search?q={{notes.title }}" target="_blank" title="Find this movie on Bing">Bing</a>-->
+    </tr>
+        <td width="25%" class="btbg1 titfont" style="word-break:break-all;">{{ notes.title }}</td>
+        <td width="30%" class="btbg1 titfont" style="word-break:break-all;">{{ notes.content }}</td>
+        <td width="30%" class="btbg1 titfont" style="word-break:break-all;">{{ notes.link }}</td>
+        <td width="15%" class="btbg1 font-center titfont">
             <a class="btn" href="{{url_for('edit', notes_id=notes.id)}}">Edit</a>
-<!--            <form class="inline-form" method="post" action="{{ url_for('delete', notes_id=notes.id) }}">-->
-<!--                <input class="btn" type="submit" name="delete" value="Delete" onclick="returen confirm('Are you sure?')">-->
-<!--            </form>-->
-        </span>
-    </li>
-{% endfor %}
-    {# 使用 endfor 标签结束 for 语句 #}
-</ul>
+        </td>
+    </tr>
+    {% endfor %}
+        {# 使用 endfor 标签结束 for 语句 #}
+</table>
+
+<!--<ul class="notes-list">-->
+<!--{% for notes in notes %}-->
+<!--        {# 迭代 notes 变量 #}-->
+<!--    <li>{{ notes.title }} | | | | {{ notes.content }}| | | | {{ notes.link }}-->
+<!--            {# 等同于 notes['title'] #}-->
+<!--        <span class="float-right">-->
+<!--&lt;!&ndash;            <a class="bing" href="https://www.bing.com/search?q={{notes.title }}" target="_blank" title="Find this movie on Bing">Bing</a>&ndash;&gt;-->
+<!--            <a class="btn" href="{{url_for('edit', notes_id=notes.id)}}">Edit</a>-->
+<!--&lt;!&ndash;            <form class="inline-form" method="post" action="{{ url_for('delete', notes_id=notes.id) }}">&ndash;&gt;-->
+<!--&lt;!&ndash;                <input class="btn" type="submit" name="delete" value="Delete" onclick="returen confirm('Are you sure?')">&ndash;&gt;-->
+<!--&lt;!&ndash;            </form>&ndash;&gt;-->
+<!--        </span>-->
+<!--    </li>-->
+<!--{% endfor %}-->
+<!--    {# 使用 endfor 标签结束 for 语句 #}-->
+<!--</ul>-->
+
 <img alt="Book" class="book" src="{{ url_for('static', filename='images/book.png') }}">
 {% endblock %}
