@@ -57,8 +57,15 @@ nav a:hover {
 	font-size: 16px;
 	color: #255e95;
 }
-
 /* ====================Add&Edit元素样式 ============================ */
+input {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    border-bottom: 1px solid #ddd;
+}
+
 input[type=submit] {
     font-family: inherit;
 }
@@ -66,14 +73,15 @@ input[type=text] {
     border: 1px solid #ddd;
 }
 input[name=title] {
-    width: 80px;
+    width: 220px;
 }
-input[name=comments] {
-    width: 80px;
+input[name=content] {
+    width: 220px;
 }
 input[name=link] {
-    width: 80px;
+    width: 220px;
 }
+
 .btn {
     font-size: 16px;
     padding: 3px 10px;
@@ -96,7 +104,7 @@ input[name=link] {
 .book {
     display: block;
     margin: 0 auto;
-    height: 100px;
+    height: 80px;
 }
 
 /* 页脚 */

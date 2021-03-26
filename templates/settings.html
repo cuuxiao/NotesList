@@ -2,7 +2,7 @@
 {% block content %}
 <h3>Settings</h3>
 <form method="post">
-    Your Name <input type="text" name="name" autocomplete="off"required value="{{ current_user.name }}">
+    Your Username <input type="text" name="username" autocomplete="off"required value="{{ current_user.username }}">
     <input class="btn" type="submit" name="submit" value="Save">
 </form>
 {% endblock %}

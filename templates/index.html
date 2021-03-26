@@ -15,23 +15,26 @@
 
 <table width="100%" border="0" cellpadding="8">
     <tr>
-    <td align="left" height="25">{{ notes|length }} Records</td>
+        <th colspan="5" align="left" height="25">{{ notes|length }} Records</th>
     </tr>
     <tr>
-        <th width="25%" class="btbg font-center titfont">Title</th>
+        <th width="2%" class="btbg font-center titfont">NO.</th>
+        <th width="23%" class="btbg font-center titfont">Title</th>
         <th width="30%" class="btbg font-center titfont">Content</th>
-        <th width="30%" class="btbg font-center titfont">Link</th>
-        <th width="15%" class="btbg font-center titfont">Operation</th>
+        <th width="35%" class="btbg font-center titfont">Link</th>
+        <th width="10%" class="btbg font-center titfont">Function</th>
+    </tr>
     {% for notes in notes %}
         {# 迭代 notes 变量 #}
-    </tr>
-        <td width="25%" class="btbg1 titfont" style="word-break:break-all;">{{ notes.title }}</td>
-        <td width="30%" class="btbg1 titfont" style="word-break:break-all;">{{ notes.content }}</td>
-        <td width="30%" class="btbg1 titfont" style="word-break:break-all;">{{ notes.link }}</td>
-        <td width="15%" class="btbg1 font-center titfont">
-            <a class="btn" href="{{url_for('edit', notes_id=notes.id)}}">Edit</a>
-        </td>
-    </tr>
+        </tr>
+            <td width="2%" class="btbg1 font-center titfont">{{ loop.index }}</td>
+            <td width="23%" class="btbg1 titfont" style="word-break:break-all;">{{ notes.title }}</td>
+            <td width="30%" class="btbg1 titfont" style="word-break:break-all;">{{ notes.content }}</td>
+            <td width="35%" class="btbg1 titfont" style="word-break:break-all;">{{ notes.link }}</td>
+            <td width="10%" class="btbg1 font-center titfont">
+                <a class="btn" href="{{url_for('edit', notes_id=notes.id)}}">Edit</a>
+            </td>
+        </tr>
     {% endfor %}
         {# 使用 endfor 标签结束 for 语句 #}
 </table>
