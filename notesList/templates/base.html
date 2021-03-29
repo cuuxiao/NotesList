@@ -27,6 +27,7 @@
                 <a class="float-left"href="{{ url_for('add') }}">Add Notes</a>
 <!--                <a class="float-left" href="{{ url_for('settings')}}">Settings</a>-->
                 <a class="float-right" href="{{ url_for('logout')}}">Logout</a>
+                <a class="float-right" href="{{ url_for('exp_excel')}}">Export</a>
             {% else %}
                 <a class="float-right" href="{{ url_for('login')}}">Login</a>
             {% endif %}

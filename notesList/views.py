@@ -7,6 +7,8 @@ from notesList import app, db
 from notesList.models import Notes, User
 from flask import render_template, request, redirect, flash, url_for
 from flask_login import login_user, login_required, logout_user, current_user
+import flask_excel as excel
+import time
 
 
 @app.route('/')
@@ -103,6 +105,20 @@ def edit(notes_id):
         flash('Item updated. ')
         return redirect(url_for('index'))
     return render_template('edit.html', notes=notes)
+
+
+@app.route('/exp_excel/', methods=['GET'])
+@login_required
+def exp_excel():
+    excel.init_excel(app)
+    query_sets = Notes.query.filter(Notes.owner == current_user.username).all()
+    column_names = ['id', 'title', 'content', 'link', 'owner']
+    return excel.make_response_from_query_sets(
+        query_sets,
+        column_names,
+        file_type='xlsx',
+        file_name= current_user.username + '\'s_Notes_' + time.strftime("%Y%m%d", time.localtime()) + '.xlsx'
+    )
 
 
 @app.route('/notes/delete/<int:notes_id>', methods=['POST'])  # 只接受POST请求
