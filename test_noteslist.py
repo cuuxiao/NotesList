@@ -4,7 +4,8 @@
 # @File : test_noteslist.py
 
 import unittest
-from app import app, db, User, Notes
+from notesList import app, db
+from notesList.models import User, Notes
 
 
 class NotesListTestCase(unittest.TestCase):
