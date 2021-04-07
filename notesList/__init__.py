@@ -18,12 +18,18 @@ else:
 
 # 实例初始化
 app = Flask(__name__)
+
 # 配置数据连接地址
-app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(app.root_path, '../data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(os.path.dirname(app.root_path), os.getenv('DATABASE_FILE', 'data.db'))
+# app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(app.root_path, '../data.db')
+
 # 关闭对模型修改的监控
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SECRET_KEY'] = os.urandom(24)
+
+# os.getenv('SECRET_KEY', 'dev') 表示读取系统环境变量 SECRET_KEY 的值，如果没有获取到，则使用 dev
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev')
+# app.config['SECRET_KEY'] = os.urandom(24)
 
 # 在扩展类实例化化前加载配置
 db = SQLAlchemy(app)
