@@ -1,0 +1,3 @@
+FLASK_APP=notesList
+FLASK_ENV=development
+FLASK_RUN_PORT=6876

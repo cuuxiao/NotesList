@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<ul>
+    <h2>Add item</h2>
+</ul>
+<form method="post">
+    <table >
+        <tr>
+            <th>Title</th>
+            <td>
+                <input type="text" name="title" autocomplete="off" placeholder="Required and maximum 20 characters" required>
+            </td>
+        </tr>
+        <tr>
+            <th>Content</th>
+            <td>
+                <input type="text" name="content" autocomplete="off" placeholder="Required and maximum 20 characters" required>
+            </td>
+        </tr>
+        <tr>
+            <th>Link</th>
+            <td>
+                <input type="text" name="link" placeholder="Maximum 30 characters">
+            </td>
+        </tr>
+    </table>
+    <ul>
+    <input class="btn" type="submit" name="submit" value="Create">
+    </ul>
+</form>
+{% endblock %}

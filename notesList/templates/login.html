@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<ul>
+    <h2>Login</h2>
+</ul>
+<form method="post">
+    <ul>
+    Username <input type="text" name="username" required><br>
+    Password <input type="password" name="password" required><br><br>
+    <!-- 密码输入框的 type 属性使用 password，会将输入值显示为圆点 -->
+    <input class="btn" type="submit" name="submit" value="Submit">
+    </ul>
+</form>
+{% endblock %}
