@@ -20,7 +20,7 @@ from notesList.models import User, Notes
 # #默认为localhost
 # FLASK_RUN_HOST=0.0.0.0
 # 
-# #development为开发环境，production为生产环境
+# #development 为开发环境，production 为生产环境
 # FLASK_ENV=development
 # 
 # #1为开启，0为关闭
