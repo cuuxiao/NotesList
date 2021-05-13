@@ -70,7 +70,7 @@ def add():
         link = request.form.get('link')
         owner = current_user.username
 
-        if not title or not content or len(link) > 30 or len(content) > 20 or len(title) > 20:
+        if not title or not content or len(link) > 60 or len(content) > 40 or len(title) > 40:
             flash('Invalid input.')  # 显示错误信息
             return redirect(url_for('add'))  # 重定向回主页
 
@@ -93,7 +93,7 @@ def edit(notes_id):
         link = request.form['link']
         owner = current_user.username
 
-        if not title or not content or len(link) > 30 or len(content) > 20 or len(title) > 20:
+        if not title or not content or len(link) > 60 or len(content) > 40 or len(title) > 40:
             flash('Invalid edit input.')
             return redirect(url_for('edit', notes_id=notes_id))  # 重定向对应的编辑页面
 

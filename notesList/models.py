@@ -33,9 +33,9 @@ class User(db.Model, UserMixin):
 
 class Notes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(20))
-    content = db.Column(db.String(20))
-    link = db.Column(db.String(30))
+    title = db.Column(db.String(40))
+    content = db.Column(db.String(40))
+    link = db.Column(db.String(60))
     owner = db.Column(db.String(20))
     comments = db.Column(db.String(20))
     reserved1 = db.Column(db.String(20))
